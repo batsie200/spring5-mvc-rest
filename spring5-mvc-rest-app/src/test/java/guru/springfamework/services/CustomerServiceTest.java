@@ -12,12 +12,10 @@ import org.mockito.MockitoAnnotations;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 /**
  * Created by rubatsirochiripa on 3/4/2018.
@@ -40,7 +38,7 @@ public class CustomerServiceTest {
     @Test
     public void getAllCustomers() throws Exception {
         //given
-        List<Customer> customers  = Arrays.asList(new Customer(), new Customer(), new Customer());
+        List<Customer> customers = Arrays.asList(new Customer(), new Customer(), new Customer());
 
         when(customerRepository.findAll()).thenReturn(customers);
 
@@ -105,7 +103,7 @@ public class CustomerServiceTest {
         when(customerRepository.save(any(Customer.class))).thenReturn(customer);
 
         //when
-        CustomerDTO savedDTO = customerService.saveCustomerByDTO(1L, customerDTO);
+        CustomerDTO savedDTO = customerService.saveCustomerById(1L, customerDTO);
 
         //then
         assertEquals(customerDTO.getFirstName(), savedDTO.getFirstName());

@@ -1,16 +1,11 @@
 package guru.springfamework.controllers.v1;
 
-import guru.springfamework.api.v1.model.CustomerDTO;
-import guru.springfamework.api.v1.model.CustomerListDTO;
 import guru.springfamework.services.CustomerService;
 import guru.springfamework.services.ResourceNotFoundException;
+import guru.springframework.model.CustomerDTO;
+import guru.springframework.model.CustomerListDTO;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 /**
  * Created by rubatsirochiripa on 3/4/2018.
@@ -29,46 +24,47 @@ public class CustomerController {
 
     @GetMapping
     @ResponseStatus(value = HttpStatus.OK)
-    public CustomerListDTO getAllCustomers(){
+    public CustomerListDTO getAllCustomers() {
 
-        List<CustomerDTO> customerDTOS = customerService.getAllCustomers();
-        if (customerDTOS == null || customerDTOS.isEmpty()){
+        CustomerListDTO customerListDTO = new CustomerListDTO();
+        customerListDTO.getCustomers().addAll(customerService.getAllCustomers());
+        if (customerListDTO == null) {
             throw new ResourceNotFoundException();
         }
-        return new CustomerListDTO(customerDTOS);
+        return customerListDTO;
     }
 
     @GetMapping("/{id}")
     @ResponseStatus(value = HttpStatus.OK)
-    public CustomerDTO getCustomerById(@PathVariable Long id){
+    public CustomerDTO getCustomerById(@PathVariable Long id) {
 
         return customerService.getCustomerById(id);
     }
 
     @PostMapping
     @ResponseStatus(value = HttpStatus.CREATED)
-    public CustomerDTO createNewCustomer(@RequestBody CustomerDTO customerDTO){
+    public CustomerDTO createNewCustomer(@RequestBody CustomerDTO customerDTO) {
 
         return customerService.createNewCustomer(customerDTO);
     }
 
     @PutMapping(value = "/{id}")
     @ResponseStatus(value = HttpStatus.OK)
-    public CustomerDTO updateCustomer(@PathVariable Long id, @RequestBody CustomerDTO customerDTO){
+    public CustomerDTO updateCustomer(@PathVariable Long id, @RequestBody CustomerDTO customerDTO) {
 
-        return customerService.saveCustomerByDTO(id, customerDTO);
+        return customerService.saveCustomerById(id, customerDTO);
     }
 
     @PatchMapping("/{id}")
     @ResponseStatus(value = HttpStatus.OK)
-    public CustomerDTO patchCustomer(@PathVariable Long id, @RequestBody CustomerDTO customerDTO){
+    public CustomerDTO patchCustomer(@PathVariable Long id, @RequestBody CustomerDTO customerDTO) {
 
         return customerService.patchCustomer(id, customerDTO);
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(value = HttpStatus.OK)
-    public void deleteCustomer(@PathVariable Long id){
+    public void deleteCustomer(@PathVariable Long id) {
 
         customerService.deleteCustomerById(id);
     }

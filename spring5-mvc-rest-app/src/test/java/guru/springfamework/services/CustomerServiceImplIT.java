@@ -53,7 +53,7 @@ public class CustomerServiceImplIT {
         customerService = new CustomerServiceImpl(CustomerMapper.CUSTOMER_MAPPER, customerRepository);
     }
 
-    private Long getCustomerIdValue(){
+    private Long getCustomerIdValue() {
         List<Customer> customers = customerRepository.findAll();
 
         System.out.println("Customers found: " + customers.size());
@@ -62,7 +62,7 @@ public class CustomerServiceImplIT {
     }
 
     @Test
-    public void patchCustomerUpdateFirstName(){
+    public void patchCustomerUpdateFirstName() {
         String updatedName = "updatedName";
         long id = getCustomerIdValue();
 

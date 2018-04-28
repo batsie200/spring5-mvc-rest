@@ -63,7 +63,7 @@ public class Bootstrap implements CommandLineRunner {
         System.out.println("############# Category Data loaded: " + categoryRepository.count() + " ##############");
     }
 
-    private void loadCustomers(){
+    private void loadCustomers() {
         Customer customer1 = new Customer();
         customer1.setFirstName("FirstOne");
         customer1.setLastName("LastOne");
@@ -94,7 +94,7 @@ public class Bootstrap implements CommandLineRunner {
 
     }
 
-    private void loadVendors(){
+    private void loadVendors() {
         Vendor vendor1 = new Vendor();
         vendor1.setName("FirstVendor");
 

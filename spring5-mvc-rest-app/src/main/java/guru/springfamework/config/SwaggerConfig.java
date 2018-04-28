@@ -20,7 +20,7 @@ import java.util.ArrayList;
 public class SwaggerConfig {
 
     @Bean
-    Docket api(){
+    Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
                 .apis(RequestHandlerSelectors.any())
@@ -30,8 +30,8 @@ public class SwaggerConfig {
                 .apiInfo(metadata());
     }
 
-    ApiInfo metadata(){
-        Contact contact = new Contact("Rubatsiro Chiripa","www.musangano.com","rubatsirochiripa@gmail.com");
+    ApiInfo metadata() {
+        Contact contact = new Contact("Rubatsiro Chiripa", "www.musangano.com", "rubatsirochiripa@gmail.com");
 
         return new ApiInfo("Spring Boot 2",
                 "Spring Framework from begginer to Guru",
@@ -40,6 +40,6 @@ public class SwaggerConfig {
                 contact,
                 "Apache license version 2.0",
                 "https://www.apache.org/licenses/LICENSE-2.0",
-        new ArrayList<>());
+                new ArrayList<>());
     }
 }

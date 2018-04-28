@@ -91,7 +91,7 @@ public class CustomerControllerTest {
     }
 
     @Test
-    public void creatNewCustomer() throws Exception{
+    public void creatNewCustomer() throws Exception {
         //given
         CustomerDTO customerDTO = new CustomerDTO();
         customerDTO.setFirstName("Barack");
@@ -125,21 +125,21 @@ public class CustomerControllerTest {
         returnDto.setFirstName(customerDTO.getFirstName());
         returnDto.setLastName(customerDTO.getLastName());
 
-        when(customerService.saveCustomerByDTO(anyLong(), ArgumentMatchers.any(CustomerDTO.class))).thenReturn(returnDto);
+        when(customerService.saveCustomerById(anyLong(), ArgumentMatchers.any(CustomerDTO.class))).thenReturn(returnDto);
 
         //when/then
         mockMvc.perform(put("/api/v1/customers/1")
                 .accept(MediaType.APPLICATION_JSON)
-        .contentType(MediaType.APPLICATION_JSON)
-        .content(asJsonString(customerDTO)))
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(asJsonString(customerDTO)))
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andExpect(jsonPath("$.firstName", equalTo("Donald")));
     }
 
     @Test
-    public void patchCustomer() throws Exception{
-    //given
+    public void patchCustomer() throws Exception {
+        //given
         CustomerDTO customer = new CustomerDTO();
         customer.setFirstName("Fred");
 
@@ -151,8 +151,8 @@ public class CustomerControllerTest {
 
         mockMvc.perform(patch("/api/v1/customers/1")
                 .accept(MediaType.APPLICATION_JSON)
-        .contentType(MediaType.APPLICATION_JSON)
-        .content(asJsonString(customer)))
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(asJsonString(customer)))
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andExpect(jsonPath("$.firstName", equalTo("Fred")))
@@ -160,23 +160,23 @@ public class CustomerControllerTest {
     }
 
     @Test
-    public void deleteCustomer() throws Exception{
+    public void deleteCustomer() throws Exception {
 
         mockMvc.perform(delete("/api/v1/customers/1")
-        .contentType(MediaType.APPLICATION_JSON))
+                .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 
         verify(customerService).deleteCustomerById(anyLong());
     }
 
     @Test
-    public void notFound()throws Exception{
+    public void notFound() throws Exception {
 
         when(customerService.getCustomerById(anyLong())).thenThrow(ResourceNotFoundException.class);
 
         mockMvc.perform(get("/api/v1/customers/" + "55")
                 .accept(MediaType.APPLICATION_JSON)
-        .contentType(MediaType.APPLICATION_JSON))
+                .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNotFound());
     }
 

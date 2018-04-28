@@ -58,7 +58,7 @@ public class VendorServiceImpl implements VendorService {
     public VendorDTO patchVendor(Long id, VendorDTO vendorDTO) {
         return vendorRepository.findById(id)
                 .map(vendor -> {
-                    if (vendorDTO.getName() != null){
+                    if (vendorDTO.getName() != null) {
                         vendor.setName(vendorDTO.getName());
                     }
                     return vendorMapper.vendorToVendorDto(vendorRepository.save(vendor));

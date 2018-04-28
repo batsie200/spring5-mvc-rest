@@ -33,10 +33,10 @@ public class VendorController {
     @ApiOperation(value = "View list of vendors", notes = "These are some notes")
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public VendorListDTO getAllVendors(){
+    public VendorListDTO getAllVendors() {
 
         List<VendorDTO> vendorDTOList = vendorService.getAllVendors();
-        if (vendorDTOList == null || vendorDTOList.isEmpty()){
+        if (vendorDTOList == null || vendorDTOList.isEmpty()) {
             throw new ResourceNotFoundException();
         }
 

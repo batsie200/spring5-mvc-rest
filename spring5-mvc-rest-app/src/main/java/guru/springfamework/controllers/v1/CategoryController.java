@@ -3,10 +3,7 @@ package guru.springfamework.controllers.v1;
 import guru.springfamework.api.v1.model.CategoryDTO;
 import guru.springfamework.api.v1.model.CategoryListDTO;
 import guru.springfamework.services.CategoryService;
-import org.springframework.context.annotation.Profile;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -26,14 +23,14 @@ public class CategoryController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public CategoryListDTO getAllCategories(){
+    public CategoryListDTO getAllCategories() {
 
         return new CategoryListDTO(categoryService.getAllCategories());
     }
 
     @GetMapping("/{zita}")
     @ResponseStatus(HttpStatus.OK)
-    public CategoryDTO getCategoryByName(@PathVariable String zita){
+    public CategoryDTO getCategoryByName(@PathVariable String zita) {
 
         return categoryService.getCategoryByName(zita);
     }
