@@ -1,8 +1,8 @@
 package guru.springfamework.controllers.v1;
 
-import guru.springfamework.api.v1.model.CustomerDTO;
 import guru.springfamework.services.CustomerService;
 import guru.springfamework.services.ResourceNotFoundException;
+import guru.springframework.model.CustomerDTO;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.ArgumentMatchers;
@@ -69,7 +69,7 @@ public class CustomerControllerTest {
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andDo(print())
-                .andExpect(jsonPath("$.customerDTOS", hasSize(2)));
+                .andExpect(jsonPath("$.customers", hasSize(2)));
     }
 
     @Test
@@ -101,7 +101,8 @@ public class CustomerControllerTest {
         returnDto.setFirstName(customerDTO.getFirstName());
         returnDto.setLastName(customerDTO.getLastName());
 
-        when(customerService.createNewCustomer(customerDTO)).thenReturn(returnDto);
+        when(customerService.createNewCustomer(ArgumentMatchers.any())).thenReturn(returnDto);
+//        when(customerService.createNewCustomer(customerDTO)).thenReturn(returnDto);
 
         //when/then
         mockMvc.perform(post("/api/v1/customers/")
